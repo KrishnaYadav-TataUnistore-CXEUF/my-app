@@ -12,6 +12,7 @@ function Square() {
   const [answer, setAnswer] = useState("");
   useEffect(() => {
     if (num * num * num === parseInt(answer)) {
+      window?.navigator?.vibrate?.(100);
       setNum(getRandomInt(12, 20));
       setAnswer("");
     }
@@ -19,7 +20,14 @@ function Square() {
   return (
     <div className="test">
       <span>{num}</span>
-      <sup>3</sup>=<input onChange={(e) => setAnswer(e.target.value)} value={answer} autoFocus></input>
+      <sup className="sup">3</sup> = {}
+      <input
+        type={"tel"}
+        className="ipTest"
+        onChange={(e) => setAnswer(e.target.value)}
+        value={answer}
+        autoFocus
+      ></input>
     </div>
   );
 }

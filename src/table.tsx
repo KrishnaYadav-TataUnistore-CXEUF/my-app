@@ -13,6 +13,7 @@ function Table() {
   const [answer, setAnswer] = useState("");
   useEffect(() => {
     if (num1 * num2 === parseInt(answer)) {
+      window?.navigator?.vibrate?.(100);
       setNum1(getRandomInt(12, 19));
       setNum2(getRandomInt(2, 9));
       setAnswer("");
@@ -20,8 +21,14 @@ function Table() {
   }, [answer]);
   return (
     <div className="test">
-      <span>{num1}</span>X<span>{num2}</span>=
-      <input onChange={(e) => setAnswer(e.target.value)} value={answer} autoFocus></input>
+      <span>{num1}</span> X <span>{num2}</span> = {}
+      <input
+        type={"tel"}
+        className="ipTest"
+        onChange={(e) => setAnswer(e.target.value)}
+        value={answer}
+        autoFocus
+      ></input>
     </div>
   );
 }

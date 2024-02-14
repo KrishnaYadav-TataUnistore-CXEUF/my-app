@@ -6,15 +6,32 @@ import Cube from "./cube";
 
 function App() {
   const [mode, setMode] = useState<"table" | "square" | "cube">("table");
+  const [sqLong, setSqLong] = useState(false);
   return (
     <div className="App">
-      <div>
-        <button onClick={() => setMode("table")}>Table</button>
-        <button onClick={() => setMode("square")}>Square</button>
-        <button onClick={() => setMode("cube")}>Cube</button>
+      <div className="buttonGrp">
+        <button className="button" onClick={() => setMode("table")}>
+          Table
+        </button>
+        <button
+          className="button"
+          onClick={() => {
+            if (mode !== "square") {
+              setMode("square");
+              setSqLong(false);
+            } else {
+              setSqLong(!sqLong);
+            }
+          }}
+        >
+          {sqLong ? "Square_l" : "Square"}
+        </button>
+        <button className="button" onClick={() => setMode("cube")}>
+          Cube
+        </button>
       </div>
       {mode === "table" && <Table></Table>}
-      {mode === "square" && <Square></Square>}
+      {mode === "square" && <Square isLong={sqLong}></Square>}
       {mode === "cube" && <Cube></Cube>}
     </div>
   );

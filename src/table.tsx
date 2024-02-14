@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import logo from "./logo.svg";
 import "./App.css";
 
 //both min and max are inclusive
@@ -11,16 +10,23 @@ function Table() {
   const [num1, setNum1] = useState<number>(getRandomInt(12, 19));
   const [num2, setNum2] = useState<number>(getRandomInt(2, 9));
   const [answer, setAnswer] = useState("");
+  const [shake, setShake] = useState(true);
   useEffect(() => {
     if (num1 * num2 === parseInt(answer)) {
       window?.navigator?.vibrate?.(100);
       setNum1(getRandomInt(12, 19));
       setNum2(getRandomInt(2, 9));
       setAnswer("");
+      setShake(true);
     }
   }, [answer]);
+  useEffect(() => {
+    if (shake) {
+      setTimeout(() => setShake(false), 200);
+    }
+  }, [shake]);
   return (
-    <div className="test">
+    <div className={`test ${shake ? "shake" : ""}`}>
       <span>{num1}</span> X <span>{num2}</span> = {}
       <input
         type={"tel"}
